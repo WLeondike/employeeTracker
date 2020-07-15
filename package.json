@@ -1,14 +1,14 @@
 {
-  "name": "db",
+  "name": "employee_tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "In this application, I will architect and build a solution for managing a company's employees using node, inquirer, and MySQL.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "WLeondike",
+  "license": "MIT",
   "dependencies": {
     "inquirer": "^7.3.2",
     "mysql": "^2.18.1"
