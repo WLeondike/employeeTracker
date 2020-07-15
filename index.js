@@ -68,4 +68,18 @@ function options() {
       }
     });
 }
+function empDep() {};
+
+function empManager() {};
+
+function addEmp() {};
+
+function removeEmp() {};
+
+function updateEmpRole() {};
+
+function updateEmpManager() {};
+
+function allRoles() {};
+
 options();
