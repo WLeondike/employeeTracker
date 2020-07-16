@@ -9,8 +9,6 @@ CREATE TABLE employee (
   last_name VARCHAR(30) NOT NULL,
   role_id INT NOT NULL,
   manager_id INT,
-  FOREIGN KEY(role_id) REFERENCES empRole(role_id) ON DELETE CASCADE,
-  FOREIGN KEY(manager_id) REFERENCES employee(emp_id) ON DELETE CASCADE
 );
 
 CREATE TABLE empRole(
@@ -18,10 +16,16 @@ CREATE TABLE empRole(
   title VARCHAR(30) NOT NULL,
   salary DECIMAL NOT NULL,
   department_id INT NOT NULL,
-  FOREIGN KEY(department_id) REFERENCES empDepartment(dep_id) ON DELETE CASCADE
 );
 
 CREATE TABLE empDepartment(
   dep_id INT(10) AUTO_INCREMENT NOT NULL PRIMARY KEY,
   dep_name VARCHAR(30) NOT NULL, 
 );
+
+ALTER TABLE employee
+ADD FOREIGN KEY(role_id) REFERENCES empRole(role_id) ON DELETE CASCADE,
+ADD FOREIGN KEY(manager_id) REFERENCES employee(emp_id) ON DELETE CASCADE
+
+ALTER TABLE empRole
+ADD FOREIGN KEY(department_id) REFERENCES empDepartment(dep_id) ON DELETE CASCADE

@@ -1,15 +1,19 @@
 USE employee_trackerDB
 
 -- employee seeds
-INSERT INTO employee (first_name, last_name)
-VALUES ("Jake", "Smith"), ("Kevin", "Jones"), ("Suzan", "Brown"), 
-       ("Maria", "Williams"), ("Chris", "Johnson"), ("David", "Lee"), 
-       ("Jose", "Rodriguez"), ("Nikki", "Garcia"), ("George", "Gonzalez"),
-       ("Juan", "Lopez"), ("Haylee", "Jones"), ("Jane", "Pearson");
-
-INSERT INTO employee(role_id, manager_id)
-VALUES (3, null), (5, 2), (2, null), (1, null), (6, 3), (4, null),
-       (7, null), (2, 4), (10, null), (8, 1), (9, 4), (1, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Jake", "Smith", 3, null), 
+       ("Kevin", "Jones", 5, 2), 
+       ("Suzan", "Brown", 2, null), 
+       ("Maria", "Williams", 1, null), 
+       ("Chris", "Johnson", 6, 3), 
+       ("David", "Lee", 4, null), 
+       ("Jose", "Rodriguez", 7, null), 
+       ("Nikki", "Garcia", 2, 4), 
+       ("George", "Gonzalez", 10, null),
+       ("Juan", "Lopez", 8, 1), 
+       ("Haylee", "Jones", 9, 4), 
+       ("Jane", "Pearson", 1, null);
 
 -- empRole seeds
 INSERT INTO empRole (title, salary, department_id)
@@ -25,6 +29,6 @@ VALUES ("Sales Coordinator", 45000, 1),
        ("Sr Marketing Manager",85000, 5);
        
 -- empDepartment seeds
-INSERT INTO department (dep_name)
+INSERT INTO empDepartment (dep_name)
 VALUES ("Sales"), ("Human Resources"), ("IT"), 
        ("Customer Experience"), ("Marketing");
