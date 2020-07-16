@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const cTable = require('console.table');
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -13,11 +14,6 @@ connection.connect(function (err) {
   if (err) throw err;
   options();
 });
-
-// connection.query("SELECT 1 + 1 AS solution", function (error, results, fields) {
-//   if (error) throw error;
-//   console.log("The solution is: ", results[0].solution);
-// });
 
 function options() {
   inquirer
@@ -79,19 +75,28 @@ function options() {
 }
 
 function viewEmp() {
-  // return this.connection.query(
-  //   `SELECT employee.emp_id, employee.first_name, employee.last_name, empRole.title, empDepartment.dep_name
-  //   AS empDepartment, empRole.salary, CONCAT(manager.first_name, '', manager.last_name)
-  //   AS manager FROM employee
-  //   LEFT JOIN empRole ON employee.role_id = empRole.role_id
-  //   LEFT JOIN empDepartment ON empRole.department_id = empDepartment.dep_id
-  //   LEFT JOIN employee a ON a.employee_id = employee.manager_id`
-  // );
+  connection.query("SELECT * FROM employee", function (error, results){
+    if (error) throw error;
+    console.table(results);
+    options();
+  });
 }
 
-function viewRole() {}
+function viewRole() {
+  connection.query("SELECT * FROM empRole", function (error, results){
+    if (error) throw error;
+    console.table(results);
+    options();
+  });
+}
 
-function viewDep() {}
+function viewDep() {
+  connection.query("SELECT * FROM empDepartment", function (error, results){
+    if (error) throw error;
+    console.table(results);
+    options();
+  });
+}
 
 function addEmp() {
   inquirer
@@ -196,5 +201,3 @@ function addRole() {
 }
 
 function updateRole() {}
-
-// options();
