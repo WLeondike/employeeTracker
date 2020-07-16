@@ -26,61 +26,69 @@ function options() {
       name: "empOptions",
       message: "What would you like to do?",
       choices: [
-        "View All Employees By Department",
-        "View All Employees By Manager",
-        "Add Employee",
-        "Remove Employee",
-        "Update Employee Role",
-        "Update Employee Manager",
+        "View All Employees",
         "View All Roles",
-        "Exit",
+        "View All Departments",
+        //"View All Employees By Manager", //Bonus
+        "Add Employee",
+        "Add Department",
+        "Add Role",
+        //"Remove Employee", //Bonus
+        //"Remove Department", //Bonus
+        //"Remove Role", //Bonus
+        "Update Employee Role",
+        //"Update Employee Manager", //Bonus
+        "Exit"
       ],
     })
     .then(function (answer) {
       switch (answer.empOptions) {
-        case "View All Employees By Department":
-          empDep();
+        case "View All Employees":
+          viewEmp();
           break;
 
-        case "View All Employees By Manager":
-          empManager();
+        case "View All Roles":
+          viewRole();
+          break;
+
+        case "View All Departments":
+          viewDep();
           break;
 
         case "Add Employee":
           addEmp();
           break;
 
-        case "Remove Employee":
-          removeEmp();
+        case "Add Department":
+          addDep();
+          break;
+
+        case "Add Role":
+          addRole();
           break;
 
         case "Update Employee Role":
-          updateEmpRole();
+          updateRole();
           break;
-        case "Update Employee Manager":
-          updateEmpManager();
-          break;
-        case "View All Roles":
-          allRoles();
-          break;
+
         case "Exit":
           connection.end();
           break;
       }
     });
 }
-function empDep() {};
+function viewEmp() {};
 
-function empManager() {};
+function viewRole() {};
+
+function viewDep() {};
 
 function addEmp() {};
 
-function removeEmp() {};
+function addDep() {};
 
-function updateEmpRole() {};
+function addRole() {};
 
-function updateEmpManager() {};
-
-function allRoles() {};
+function updateRole() {};
 
 options();
