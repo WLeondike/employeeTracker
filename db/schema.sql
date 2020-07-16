@@ -23,5 +23,5 @@ CREATE TABLE empRole(
 
 CREATE TABLE empDepartment(
   dep_id INT(10) AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  name VARCHAR(30) NOT NULL, 
+  dep_name VARCHAR(30) NOT NULL, 
 );
