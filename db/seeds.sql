@@ -8,8 +8,8 @@ VALUES ("Jake", "Smith"), ("Kevin", "Jones"), ("Suzan", "Brown"),
        ("Juan", "Lopez"), ("Haylee", "Jones"), ("Jane", "Pearson");
 
 INSERT INTO employee(role_id, manager_id)
-VALUES (3, null), (5, 2), (2, null), (1, null), (3, 3), (4, null),
-       (2, null), (1, 4), (3, null), (5, 1), (4,null), (1, null);
+VALUES (3, null), (5, 2), (2, null), (1, null), (6, 3), (4, null),
+       (7, null), (2, 4), (10, null), (8, 1), (9, 4), (1, null);
 
 -- empRole seeds
 INSERT INTO empRole (title, salary, department_id)
