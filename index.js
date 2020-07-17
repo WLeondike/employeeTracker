@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const cTable = require('console.table');
+const cTable = require("console.table");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -75,7 +75,7 @@ function options() {
 }
 
 function viewEmp() {
-  connection.query("SELECT * FROM employee", function (error, results){
+  connection.query("SELECT * FROM employee", function (error, results) {
     if (error) throw error;
     console.table(results);
     options();
@@ -83,7 +83,7 @@ function viewEmp() {
 }
 
 function viewRole() {
-  connection.query("SELECT * FROM empRole", function (error, results){
+  connection.query("SELECT * FROM empRole", function (error, results) {
     if (error) throw error;
     console.table(results);
     options();
@@ -91,7 +91,7 @@ function viewRole() {
 }
 
 function viewDep() {
-  connection.query("SELECT * FROM empDepartment", function (error, results){
+  connection.query("SELECT * FROM empDepartment", function (error, results) {
     if (error) throw error;
     console.table(results);
     options();
@@ -129,7 +129,7 @@ function addEmp() {
           first_name: answer.firstName,
           last_name: answer.lastName,
           role_id: answer.roleID,
-          manager_id: answer.managerID
+          manager_id: answer.managerID,
         },
         function (err) {
           if (err) throw err;
@@ -142,62 +142,117 @@ function addEmp() {
 
 function addDep() {
   inquirer
-  .prompt([
-    {
-      type: "input",
-      name: "department",
-      message: "Name of the new department?",
-    }
-  ])
-  .then(function (answer) {
-    connection.query(
-      "INSERT INTO empDepartment SET ?",
+    .prompt([
       {
-        dep_name: answer.department,
+        type: "input",
+        name: "department",
+        message: "Name of the new department?",
       },
-      function (err) {
-        if (err) throw err;
-        console.log("Department added! returning...");
-        options();
-      }
-    );
-  });
+    ])
+    .then(function (answer) {
+      connection.query(
+        "INSERT INTO empDepartment SET ?",
+        {
+          dep_name: answer.department,
+        },
+        function (err) {
+          if (err) throw err;
+          console.log("Department added! returning...");
+          options();
+        }
+      );
+    });
 }
 
 function addRole() {
   inquirer
-  .prompt([
-    {
-      type: "input",
-      name: "title",
-      message: "Name of the new role?",
-    },
-    {
-      type: "input",
-      name: "salary",
-      message: "What is the new role's salary?",
-    },
-    {
-      type: "input",
-      name: "depID",
-      message: "What is the Department ID for the new role?",
-    }
-  ])
-  .then(function (answer) {
-    connection.query(
-      "INSERT INTO empRole SET ?",
+    .prompt([
       {
-        title: answer.title,
-        salary: answer.salary,
-        department_id: answer.depID
+        type: "input",
+        name: "title",
+        message: "Name of the new role?",
       },
-      function (err) {
-        if (err) throw err;
-        console.log("Role added! returning...");
-        options();
-      }
-    );
-  });
+      {
+        type: "input",
+        name: "salary",
+        message: "What is the new role's salary?",
+      },
+      {
+        type: "input",
+        name: "depID",
+        message: "What is the Department ID for the new role?",
+      },
+    ])
+    .then(function (answer) {
+      connection.query(
+        "INSERT INTO empRole SET ?",
+        {
+          title: answer.title,
+          salary: answer.salary,
+          department_id: answer.depID,
+        },
+        function (err) {
+          if (err) throw err;
+          console.log("Role added! returning...");
+          options();
+        }
+      );
+    });
 }
 
-function updateRole() {}
+function updateRole() {
+  let updateEmpArr = [];
+  let newRoleArr = [];
+  let empRes = [];
+  connection.query(
+    "SELECT emp_id, first_name, last_name FROM employee",
+    (err, res) => {
+      empRes = res;
+      if (err) throw err;
+      for (i = 0; i < res.length; i++) {
+        let firstName = res[i].first_name;
+        let lastName = res[i].last_name;
+        updateEmpArr.push(firstName + " " + lastName);
+      } 
+      connection.query("SELECT role_id, title FROM empRole", (err, result) => {
+        if (err) throw err;
+        for (j = 0; j < result.length; j++) {
+          newRoleArr.push(result[j].title);
+        }
+        inquirer
+          .prompt([
+            {
+              type: "list",
+              name: "updatedEmp",
+              message: "Which employee would you like to update?",
+              choices: updateEmpArr,
+            },
+            {
+              type: "list",
+              name: "updatedRole",
+              message: "What is the employee's new role?",
+              choices: newRoleArr,
+            },
+          ])
+          .then(function (answer) {
+            const roleId = result.filter(
+              (empRole) => empRole.title === answer.updatedRole
+            );
+            let employeeName = answer.updatedEmp.split(" ")[0];
+            const emplId = empRes.filter(
+              (employee) => employee.first_name === employeeName
+            );
+            connection.query(
+              "UPDATE employee SET role_id = ? WHERE emp_id = ?",
+              [roleId[0].role_id, emplId[0].emp_id],
+              function (err, res) {
+                if (err) throw err;
+                console.log("Updated role! returning...");
+                options();
+              }
+            );
+          });
+      });
+    }
+  );
+}
