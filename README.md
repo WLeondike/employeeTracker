@@ -11,7 +11,6 @@
   
 
   ## Table of Contents
-  <hr>
 
   * [Installation](#installation)
   * [Credits](#credits)
@@ -20,30 +19,22 @@
   
 
   ## Installation
-  <hr>
   
   > ``` npm i mysql ``` <br> ``` npm i inquirer ``` <br> ``` npm i console.table ```
   
   
   ## Credits
-  <hr>
   
   John Dinsmore <br> Jorge Alvarez <br> W3 Schools <br> MDN Web docs <br> mySQL <br> inquirer <br> console.table <br> npm
   
 
   ## Screenshots
-  <hr>
-  <img src ="./assets/images/empTable.png" width="400">
-  <hr>
-  <img src ="./assets/images/roleTable.png" width="400">
-  <hr>
-  <img src ="./assets/images/depTable.png" width="400">
-  <hr>
-  <img src ="./assets/images/addEmp.png" width="400">
-  <hr>
-  <img src ="./assets/images/updateEmp.png" width="400">
-  <hr>
 
+  <img src ="./assets/images/empTable.png" width="400">
+  <img src ="./assets/images/roleTable.png" width="400">
+  <img src ="./assets/images/depTable.png" width="400">
+  <img src ="./assets/images/addEmp.png" width="400">
+  <img src ="./assets/images/updateEmp.png" width="400">
 
   ## License
 
